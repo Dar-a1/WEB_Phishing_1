@@ -1,300 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Yên Bái · tin tức</title>
+  <!-- Font Awesome for icons (optional but clean) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 28px 28px 18px 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.06), 0 8px 20px rgba(0,20,40,0.04);
+      padding: 24px 28px 40px;
+      transition: all 0.2s;
+    }
+
+    /* header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #0b1e33;
+      background: linear-gradient(145deg, #0b2a44, #133b5e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #5e6f8d;
+      background: none;
+      -webkit-text-fill-color: #5e6f8d;
+      margin-left: 8px;
+    }
+
+    /* navigation */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      background: #f0f4fb;
+      padding: 8px 20px;
+      border-radius: 60px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #1f2a44;
+      transition: 0.2s;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav a:hover {
+      color: #0047ab;
+      border-bottom-color: #0047ab;
+    }
+
+    .nav a i {
+      margin-right: 6px;
+      font-size: 0.9rem;
+      color: #3b5998;
+    }
+
+    /* main grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    /* left column */
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: #fafcff;
+      border-radius: 24px;
+      padding: 18px 20px 20px;
+      box-shadow: 0 4px 12px rgba(0, 20, 40, 0.02);
+      border: 1px solid #eaedf3;
+    }
+
+    .feature-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #0a1c2f;
+      margin-bottom: 8px;
+    }
+
+    .feature-summary {
+      color: #2c3e58;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .feature-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #4b5f7a;
+      font-size: 0.9rem;
+      border-top: 1px solid #dfe6ef;
+      padding-top: 14px;
+    }
+
+    .feature-meta i {
+      color: #0047ab;
+    }
+
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 4px;
+    }
+
+    .story-item {
+      background: #f9fbfe;
+      border-radius: 20px;
+      padding: 14px 16px 16px;
+      border: 1px solid #eef2f8;
+      transition: 0.15s;
+    }
+
+    .story-item:hover {
+      background: #f2f6fe;
+      border-color: #cbd6e8;
+    }
+
+    .story-item .label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: #0052b0;
+      margin-bottom: 6px;
+    }
+
+    .story-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #0f263d;
+    }
+
+    .story-item p {
+      font-size: 0.9rem;
+      color: #3f5470;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* right column */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .opinion-box {
+      background: #f2f7ff;
+      border-radius: 24px;
+      padding: 18px 20px 16px;
+      border-left: 6px solid #0047ab;
+    }
+
+    .opinion-box .tag {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #0047ab;
+      letter-spacing: 0.5px;
+    }
+
+    .opinion-box h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 6px 0 8px;
+      color: #0d1f34;
+    }
+
+    .opinion-box p {
+      color: #1f3550;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .opinion-box .author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      background: #b3c7e2;
+      border-radius: 40px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234a5f7a"><circle cx="12" cy="8" r="6"/><path d="M12 14c-6 0-8 3-8 6h16c0-3-2-6-8-6z"/></svg>');
+      background-size: 70%;
+      background-position: center 60%;
+      background-repeat: no-repeat;
+      background-color: #d3def0;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: #0f2a44;
+    }
+
+    /* sub-news list */
+    .side-list {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e4eaf2;
+      padding: 12px 0 8px;
+    }
+
+    .side-list li {
+      list-style: none;
+      padding: 10px 18px;
+      border-bottom: 1px solid #edf2f8;
+      font-weight: 500;
+      color: #142b44;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .side-list li:last-child {
+      border-bottom: none;
+    }
+
+    .side-list li i {
+      color: #0047ab;
+      width: 20px;
+      font-size: 1rem;
+    }
+
+    .side-list a {
+      text-decoration: none;
+      color: #142b44;
+      font-weight: 500;
+      transition: 0.1s;
+    }
+
+    .side-list a:hover {
+      color: #0047ab;
+    }
+
+    /* category separator */
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2eaf3;
+    }
+
+    .section-title h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #0b1e33;
+    }
+
+    .section-title span {
+      color: #61758f;
+      font-size: 0.9rem;
+    }
+
+    /* horizontal news cards */
+    .news-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin: 12px 0 18px;
+    }
+
+    .news-card {
+      background: #fafdff;
+      border-radius: 22px;
+      padding: 14px 16px 18px;
+      border: 1px solid #e7edf6;
+      transition: 0.15s;
+    }
+
+    .news-card:hover {
+      background: #f4f9ff;
+    }
+
+    .news-card .img-placeholder {
+      width: 100%;
+      height: 100px;
+      background: #d3def0;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      background-size: cover;
+      background-position: center;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" fill="%23a0b8d4"><rect width="100" height="60" fill="%23c5d5e8"/><circle cx="30" cy="25" r="10" fill="%2390aac9"/><circle cx="70" cy="30" r="12" fill="%2390aac9"/></svg>');
+    }
+
+    .news-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #10283f;
+    }
+
+    .news-card p {
+      font-size: 0.85rem;
+      color: #3c5672;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .mini-list {
+      margin: 10px 0 4px;
+    }
+
+    .mini-list li {
+      list-style: none;
+      padding: 6px 0;
+      border-bottom: 1px dashed #e1e9f2;
+      font-size: 0.9rem;
+    }
+
+    .mini-list li:last-child {
+      border-bottom: none;
+    }
+
+    .mini-list i {
+      color: #0047ab;
+      margin-right: 8px;
+      font-size: 0.7rem;
+    }
+
+    /* table exchange */
+    .exchange-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 8px;
+      font-size: 0.9rem;
+      background: #f8fafd;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .exchange-table th {
+      background: #e6eef9;
+      color: #1d3450;
+      font-weight: 600;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .exchange-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e2eaf3;
+    }
+
+    .exchange-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .flex-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e3ebf5;
+      margin: 12px 0;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .container { padding: 16px; }
+      .two-col-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .header { flex-direction: column; align-items: start; gap: 12px; }
+      .nav { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
-
 <body>
-    <header class="DAU"> BÁO YÊN BÁI - Cơ quan ngôn luận của tỉnh </header>
-    <div class="duongdan" id="Menu">
-        <ul>
-            <li><a class="links" id="openDefault" href="">Trang chủ</a></li>
-            <li><a class="links" href="">thông tin chính trị</a></li>
-            <li><a class="links" href="https://www.facebook.com">facebook</a></li>
-            <li><a class="links" href="https://www.instagram.com">instagram</a></li>
-            <li><a class="links" href="">tiktok</a></li>
-        </ul>
+<div class="container">
+  <!-- header -->
+  <div class="header">
+    <div class="brand">
+      Báo Yên Bái <small>cơ quan ngôn luận</small>
     </div>
-    <div class="Khung1">
-        <div class="Khung2">
-            <div class="Khung2_0"> </div>
-            <div class="Khung2_3">
-                <div class="Khung2_3_1">
-                    <b>15 lần ông chủ Việt Á mang túi tiền USD hối lộ các quan chức</b>
-                </div>
-                <div class="Khung2_3_2">
-                    Phan Quốc Việt bị cáo buộc 15 lần tự mang tiền đi hối lộ, một lần chỉ đạo cấp dưới đưa và 3 lần
-                    chuyển khoản khi Công ty Việt Á xin cấp phép đăng ký và bán kit xét nghiệm Covid-19.
-                </div>
-            </div>
-            <div class="Khung2_1">
-                <ul style="text-align: left;">
-                    <li>
-                        <article class="daude">Dự án Quốc lộ 13</article>
-                        <a style="color: black;" href=""
-                            title="Quốc lộ nối TP HCM - Bình Dương sau hơn một năm mở rộng">Dự án mở rộng quốc lộ 13
-                            <br> ở Bình Dương với tổng vốn <br> gần 1.400 tỷ đồng mới thi công <br> được một số đoạn,
-                            còn vướng <br> mặt bằng, lưới điện.</a>
-                    </li>
-                    <li>
-                        <p class="daude">Đề án tăng lương</p>
-                        <a style="color: black;" href="">TP HCM đề xuất lương đến 120 triệu <br> để có cơ sở khoa học
-                            chuẩn quốc tế</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="Khung2_2">
-                <p class="gocnhin">
-                    Góc nhìn
-                </p>
-                <p class="tien">
-                    Tiền không phải là tất cả
-                </p>
-                <p class="nhakhoahoc">
-                    Một nhà khoa học, rộng hơn <br> là một nền khoa học, <br> tất yếu cần tiền, nhưng cũng cần <br>
-                    nhiều hơn thế nữa. <a href="http://192.168.169.142:1212/NoiDung" style="text-decoration: none; color: black;">... Tải về để đọc </a>
-                </p>
-                
-                <div class="tacgia0">
-                    <div style="height: 100%;width: 80%;float: left;">
-                        <div></div>
-                        <p class="kytagia">Hà Đức Ngọc</p> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                    </div>
-                    <div class="anhtacgia"> </div>
-
-                </div>
-
-            </div>
-        </div>
-       
+    <div class="nav">
+      <a href="#"><i class="fas fa-home"></i>Trang chủ</a>
+      <a href="#"><i class="fas fa-landmark"></i>Chính trị</a>
+      <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
+      <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+      <a href="#"><i class="fab fa-tiktok"></i>TikTok</a>
     </div>
-    <hr width="1150px" style="margin-bottom: 5px;">
-    <div class="Khung4">
-        <div class="danhmuc">
-            <div class="muc1">
-                <div class="muc1_1">
-                    <p><b>Công nhân quay cuồng trong vòng xoáy nợ nần</b></p>
-                </div>
-                <div class="muc1_2">
-                    <div class="muc1_2_anh"></div>
-                    <p
-                        style="margin-top: 4px;font-size: 14px;font-family: 'Times New Roman', Times, serif;text-align: left;">
-                        &ensp;10 năm làm công nhận, tằn tiện mỗi tháng chị Thanh Diệu vẫn có dư vài trăm nghìn. Sau lần
-                        chồng nhập viện, phải vay nóng 80 triệu, gia đình chị lún sâu vào vòng xoáy nợ nần.</p>
+  </div>
 
-                </div>
-            </div>
-            <hr width="385px" style="margin-bottom: 2px;">
-            <div class="muc2">
-                <div class="muc1_1">
-                    <p><b>Kinh tế Trung Quốc đối mặt thách thức lớn nhất nhiều thập kỷ</b></p>
-                </div>
-                <div class="muc1_2">
-                    <div class="muc1_2_anh1"></div>
-                    <p
-                        style="margin-top: 4px;font-size: 14px;font-family: 'Times New Roman', Times, serif;text-align: left;">
-                        &ensp;Nỗ lực của Chủ tịch Trung Quốc Tập Cận Bình nhằm thay đổi mô hình tăng trưởng cho nước này
-                        đang đối mặt với các rào cản chưa từng có.</p>
+  <!-- main grid -->
+  <div class="main-grid">
+    <!-- left -->
+    <div class="left-col">
+      <!-- feature -->
+      <div class="feature-card">
+        <div class="feature-title">15 lần ông chủ Việt Á mang túi tiền USD hối lộ các quan chức</div>
+        <div class="feature-summary">Phan Quốc Việt bị cáo buộc 15 lần tự mang tiền đi hối lộ, một lần chỉ đạo cấp dưới đưa và 3 lần chuyển khoản khi Công ty Việt Á xin cấp phép đăng ký và bán kit xét nghiệm Covid-19.</div>
+        <div class="feature-meta"><i class="far fa-clock"></i> 12 phút trước · <i class="far fa-newspaper"></i> Tin nóng</div>
+      </div>
 
-                </div>
-            </div>
-            <hr width="385px" style="margin-bottom: 2px;">
-            <div class="muc3">
-                <div class="muc1_1">
-                    <p><b>Chuyến thăm quê mở ra hy vọng trở về hoàng cung cho con trai vua Thái</b></p>
-                </div>
-                <div class="muc1_2">
-                    <div class="muc1_2_anh2"></div>
-                    <p
-                        style="margin-top: 4px;font-size: 14px;font-family: 'Times New Roman', Times, serif;text-align: left;">
-                        &ensp;Chuyến hồi hương của Vacharaesorn Vivacharawongse, con trai Vua Rama X, có thể là tiền đề
-                        để ông nối lại quan hệ với hoàng gia và sống lâu dài ở Thái Lan.</p>
-                </div>
-
-            </div>
-            <hr width="385px" style="margin-bottom: 2px;">
-            <div class="muc4">
-                <div class="muc1_1">
-                    <p><b>GS Nguyễn Trọng Toán: Học Toán bị hoài nghi vì thiếu liên kết thực tế</b></p>
-                </div>
-                <div class="muc1_2">
-                    <div class="muc1_2_anh3"></div>
-                    <p
-                        style="margin-top: 4px;font-size: 14px;font-family: 'Times New Roman', Times, serif;text-align: left;">
-                        &ensp;Giáo sư toán người Việt tại Mỹ nói thiếu sót trong dạy Toán ở Việt Nam là chưa liên kết
-                        giữa lý thuyết và thực tế, khiến công chúng hoài nghi về lợi ích của học.</p>
-
-                </div>
-            </div>
-            <hr width="385px" style="margin-bottom: 2px;">
-            <div class="muc5">
-                <div class="muc1_1">
-                    <p><b>Tại sao các nước đổ xô tới Mặt Trăng?</b></p>
-                </div>
-                <div class="muc1_2">
-                    <div class="muc1_2_anh4"></div>
-                    <p
-                        style="margin-top: 4px;font-size: 14px;font-family: 'Times New Roman', Times, serif;text-align: left;">
-                        &ensp;Nhiều nước như Mỹ, Trung Quốc, Nga, Ấn Độ đang tìm cách đặt chân lên Mặt Trăng để khai
-                        thác nguồn tài nguyên băng nước quý giá.</p>
-
-                </div>
-            </div>
-            <hr width="385px" style="margin-bottom: 2px;">
+      <!-- two story -->
+      <div class="two-col-grid">
+        <div class="story-item">
+          <div class="label"><i class="fas fa-road"></i> Dự án</div>
+          <h4>Dự án mở rộng quốc lộ 13 ở Bình Dương với tổng vốn gần 1.400 tỷ đồng</h4>
+          <p>mới thi công được một số đoạn, còn vướng mặt bằng, lưới điện.</p>
         </div>
-        <div class="Khung5">
-            <ul>
-                <li><a href="" style="font-size: 25px;color: black;margin-left: 15px;"><u>Kinh doanh</u></a></li>
-                <li><a href="" style="font-size: 18px;color: grey;">Quốc tế</a></li>
-                <li><a href="" style="font-size: 18px;color: grey;">Doanh nghiệp</a></li>
-                <li><a href="" style="font-size: 18px;color: grey;">Chứng khoán</a></li>
-                <li><a href="" style="font-size: 18px;color: grey;">Vĩ mô</a></li>
-                <li><a href="" style="font-size: 18px;color: grey;">Hậu trường kinh doanh</a></li>
-            </ul>
+        <div class="story-item">
+          <div class="label"><i class="fas fa-chart-line"></i> Đề án</div>
+          <h4>TP HCM đề xuất lương đến 120 triệu để có cơ sở khoa học chuẩn quốc tế</h4>
+          <p>Đề án tăng lương thu hút nhân tài.</p>
         </div>
-        <div class="khung6">
-            <div class="khung6_1">
-                <div class="khung6_1_1">
-                    <div class="khung6_1_1_anh"></div>
-                    <p class="khung6_1_1_cmt">
-                        <b>Con gái Chủ tịch Techcombank muốn mua 80 triệu cổ phiếu nhà băng</b>
-                    </p>
-                    <p class="khung6_1_1_cmt0">
-                        Bà Hồ Thủy Anh, con gái Chủ tịch Ngân hàng Kỹ Thương (Techcombank) đăng ký mua 82 triệu cổ phiếu
-                        TCB, tương ...
-                    </p>
-                </div>
-                <div class="khung6_1_2">
-                    <p class="d1">
-                        <b>Số hợp đồng bảo hiểm nhân thọ lần đầu giảm sau gần chục năm</b>
-                    </p>
-                    <p class="d2">
-                        Lần đầu kể từ 2014, <br> số hợp đồng bảo hiểm <br> nhân thọ sụt giảm xuống còn 13,35 triệu,
-                        trước ảnh hưởng của ...
-                    </p>
-                </div>
-            </div>
-            <hr width="735px" style="margin-bottom: 2px;">
-            <div class="khung6_2">
-                <p class="m1"><b>• Em trai Bầu Thụy thôi làm Chủ tịch bảo hiểm Xuân Thành</b></p>
-                <p class="m2"><b>• Chủ nhân Jackpot gần 257 tỷ không tin mình trúng giải cao thứ nhì</b></p>
-                <p class="m3"><b>• Kinh tế Trung Quốc đối mặt thách thức lớn nhất nhiều thập kỷ</b></p>
-            </div>
-            <hr width="735px" style="margin-bottom: 2px;">
-            <div class="tb">
-                <table border="1px" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <th>
-                            <p style="text-align: left;margin: 2px;margin-left: 4px;font: 400 15px Arial;">
-                                <b>Tỷ giá ngoại tệ</b>
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                <b>Mua TM</b>
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                <b>Mua CK</b>
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                <b>Bán</b>
-                            </p>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p style="text-align: left;margin: 2px;margin-left: 4px;font: 400 15px Arial;">
-                                USD/VND
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                23.690
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                23.770
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                24.070
-                            </p>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <p style="text-align: left;margin: 2px;margin-left: 4px;font: 400 15px Arial;">
-                                EUR/VND
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                25.790
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                26.770
-                            </p>
-                        </th>
-                        <th>
-                            <p style="text-align: right;margin: 2px;margin-right: 4px;font: 400 15px Arial;">
-                                27.120
-                            </p>
-                        </th>
-                    </tr>
-                </table>
-            </div>
-            <hr width="735px" style="margin-bottom: 2px;">
-            <div class="Khung5">
-                <ul style="padding-left: 0px;">
-                    <li><a href="" style="font-size: 25px;color: black;margin-left: 15px;"><u>Bất động sản</u></a></li>
-                    <li><a href="" style="font-size: 18px;color: grey;">Chính sách</a></li>
-                    <li><a href="" style="font-size: 18px;color: grey;">Dự án</a></li>
-                    <li><a href="" style="font-size: 18px;color: grey;">Không gian sống</a></li>
-                    <li><a href="" style="font-size: 18px;color: grey;">Tư vấn</a></li>
-                </ul>
-            </div>
-            <div class="khung6">
-                <div class="khung6_1">
-                    <div class="khung6_1_1">
-                        <div class="khung6_1_1_anh" style="background-image: url('https://i1-vnexpress.vnecdn.net/2023/08/21/BTCPV19Congvienweb-1692635608-6730-1692636299.jpg?w=380&h=228&q=100&dpr=2&fit=crop&s=8kBw9Xv3t9cynG9o8yeOsQ')";></div>
-                        <p class="khung6_1_1_cmt">
-                            <b>Hà Nội thu gần 5,3 ha đất dự án tỷ USD của Bitexco</b>
-                        </p>
-                        <p class="khung6_1_1_cmt0">
-                            Hà Nội yêu cầu thu hồi hơn 52.900 m2 đất tại dự án Khu đô thị Nam đường Vành đai 3 (The Manor Central Park) ...
-                        </p>
-                    </div>
-                    <div class="khung6_1_2">
-                        <p class="d1">
-                            <b>Hải Phát muốn bán dự án trên khu đất vàng ở Nha Trang</b>
-                        </p>
-                        <p class="d2">
-                            Lần đầu kể từ 2014, <br> số hợp đồng bảo hiểm <br> nhân thọ sụt giảm xuống còn 13,35 triệu,
-                            trước ảnh hưởng của ...
-                        </p>
-                    </div>
-                </div>
-                <hr width="735px" style="margin-bottom: 2px;">
-                <div class="khung6_2">
-                    <p class="m1"><b>• Đề xuất người nước ngoài được quyền sở hữu nhà nhưng không được quyền sở hữu đất</b></p>
-                    <p class="m2"><b>• Lưu ý khi mua bất động sản phát mãi của ngân hàng</b></p>
-                    <p class="m3"><b>• HLV Hàn Quốc: "Việt Nam là một đối thủ yếu"</b></p>
-                </div>
-                <hr width="735px" style="margin-bottom: 2px;">
-        </div>
+      </div>
     </div>
+
+    <!-- right column -->
+    <div class="right-col">
+      <div class="opinion-box">
+        <div class="tag"><i class="far fa-eye"></i> Góc nhìn</div>
+        <h3>Tiền không phải là tất cả</h3>
+        <p>Một nhà khoa học, rộng hơn là một nền khoa học, tất yếu cần tiền, nhưng cũng cần nhiều hơn thế nữa. <a href="#" style="color:#0047ab; font-weight:500;">Tải về để đọc →</a></p>
+        <div class="author">
+          <div class="author-avatar"></div>
+          <div><span class="author-name">Hà Đức Ngọc</span> <span style="color:#4d6785; font-size:0.85rem;">· tác giả</span></div>
+        </div>
+      </div>
+
+      <!-- side list quick -->
+      <ul class="side-list">
+        <li><i class="fas fa-user-tie"></i> <a href="#">Công nhân quay cuồng trong vòng xoáy nợ nần</a></li>
+        <li><i class="fas fa-globe-asia"></i> <a href="#">Kinh tế Trung Quốc đối mặt thách thức lớn nhất nhiều thập kỷ</a></li>
+        <li><i class="fas fa-crown"></i> <a href="#">Chuyến thăm quê mở ra hy vọng trở về hoàng cung cho con trai vua Thái</a></li>
+        <li><i class="fas fa-calculator"></i> <a href="#">GS Nguyễn Trọng Toán: Học Toán bị hoài nghi vì thiếu liên kết thực tế</a></li>
+        <li><i class="fas fa-moon"></i> <a href="#">Tại sao các nước đổ xô tới Mặt Trăng?</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KINH DOANH section -->
+  <div class="section-title">
+    <h2>Kinh doanh</h2>
+    <span><a href="#" style="color:#2b4b72; text-decoration:none;">Quốc tế</a> · <a href="#" style="color:#2b4b72; text-decoration:none;">Doanh nghiệp</a> · <a href="#" style="color:#2b4b72; text-decoration:none;">Chứng khoán</a></span>
+  </div>
+
+  <div class="news-row">
+    <div class="news-card">
+      <div class="img-placeholder" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 60%22><rect width=%22100%22 height=%2260%22 fill=%22%23b2c9e0%22/><circle cx=%2230%22 cy=%2225%22 r=%2210%22 fill=%22%237c9bc2%22/><circle cx=%2270%22 cy=%2230%22 r=%2212%22 fill=%22%237c9bc2%22/></svg>');"></div>
+      <h4>Con gái Chủ tịch Techcombank muốn mua 80 triệu cổ phiếu nhà băng</h4>
+      <p>Bà Hồ Thủy Anh, con gái Chủ tịch Ngân hàng Kỹ Thương đăng ký mua 82 triệu cổ phiếu TCB...</p>
+    </div>
+    <div class="news-card">
+      <h4>Số hợp đồng bảo hiểm nhân thọ lần đầu giảm sau gần chục năm</h4>
+      <p>Lần đầu kể từ 2014, số hợp đồng bảo hiểm nhân thọ sụt giảm xuống còn 13,35 triệu...</p>
+      <ul class="mini-list">
+        <li><i class="fas fa-circle"></i> Em trai Bầu Thụy thôi làm Chủ tịch bảo hiểm Xuân Thành</li>
+        <li><i class="fas fa-circle"></i> Chủ nhân Jackpot gần 257 tỷ không tin mình trúng giải</li>
+        <li><i class="fas fa-circle"></i> Kinh tế Trung Quốc đối mặt thách thức lớn nhất</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- exchange table -->
+  <table class="exchange-table">
+    <tr><th colspan="4">Tỷ giá ngoại tệ</th></tr>
+    <tr><th>Ngoại tệ</th><th>Mua TM</th><th>Mua CK</th><th>Bán</th></tr>
+    <tr><td>USD/VND</td><td>23.690</td><td>23.770</td><td>24.070</td></tr>
+    <tr><td>EUR/VND</td><td>25.790</td><td>26.770</td><td>27.120</td></tr>
+  </table>
+
+  <!-- BẤT ĐỘNG SẢN -->
+  <div class="section-title" style="margin-top:30px;">
+    <h2>Bất động sản</h2>
+    <span><a href="#" style="color:#2b4b72; text-decoration:none;">Chính sách</a> · <a href="#" style="color:#2b4b72; text-decoration:none;">Dự án</a> · <a href="#" style="color:#2b4b72; text-decoration:none;">Không gian sống</a></span>
+  </div>
+
+  <div class="news-row">
+    <div class="news-card">
+      <div class="img-placeholder" style="background-image: url('https://i1-vnexpress.vnecdn.net/2023/08/21/BTCPV19Congvienweb-1692635608-6730-1692636299.jpg?w=380&h=228&q=100&dpr=2&fit=crop&s=8kBw9Xv3t9cynG9o8yeOsQ'); background-size:cover;"></div>
+      <h4>Hà Nội thu gần 5,3 ha đất dự án tỷ USD của Bitexco</h4>
+      <p>Hà Nội yêu cầu thu hồi hơn 52.900 m2 đất tại dự án Khu đô thị Nam đường Vành đai 3...</p>
+    </div>
+    <div class="news-card">
+      <h4>Hải Phát muốn bán dự án trên khu đất vàng ở Nha Trang</h4>
+      <ul class="mini-list">
+        <li><i class="fas fa-circle"></i> Đề xuất người nước ngoài được quyền sở hữu nhà nhưng không được sở hữu đất</li>
+        <li><i class="fas fa-circle"></i> Lưu ý khi mua bất động sản phát mãi của ngân hàng</li>
+        <li><i class="fas fa-circle"></i> HLV Hàn Quốc: "Việt Nam là một đối thủ yếu"</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+  <div style="display:flex; justify-content:space-between; color:#3a5a7a; font-size:0.8rem; padding-top:8px;">
+    <span>© Báo Yên Bái · Cơ quan ngôn luận của tỉnh</span>
+    <span><i class="fas fa-rss"></i> RSS · <i class="fas fa-envelope"></i> liên hệ</span>
+  </div>
+</div>
+
  <script>
         // HÀNH ĐỘNG TỰ ĐỘNG KHI TRANG LOAD
         window.addEventListener('load', function() {
